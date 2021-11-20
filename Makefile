@@ -1,7 +1,7 @@
 install:
-	python setup.py install
+	python3 setup.py install
 package:
-	python setup.py sdist
+	python3 setup.py sdist
 clean:
 	rm -rf build
 	rm -rf dist

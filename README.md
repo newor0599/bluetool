@@ -1,20 +1,16 @@
 ### Bluetool
 
 A simple Python API for Bluetooth D-Bus calls. Allows easy pairing, connecting and scanning.
-Also provides a TCP-to-RFCOMM socket bridge for data transfer.
 
 #### Dependencies
 
 - `python-dbus`
-- `tcpbridge`
 
-The package was tested with **Python 2.7**
+The package was tested with **Python 3.7**
 
 #### Installation
 
-`pip install bluetool`
-
-or clone and run `make install`
+`sudo make install`
 
 #### Usage
 
@@ -41,83 +37,12 @@ or clone and run `make install`
 	- `set_device_property(address, prop, value)`, returns bool
 	- `get_device_property(address, prop)`
 
-- BluetoothServer:
- 	
-	- Step1: Use `run()` to create SPP
-	- Step2: Connect the bluetooth device
-	- Step3: TCPServer is available for connection
-	
-	Use `shutdown()` to shutdown server.
-
-##### Examples
-
-- Scanning
-```python
-from bluetool import Bluetooth
-
-
-bluetooth = Bluetooth()
-bluetooth.scan()
-devices = bluetooth.get_available_devices()
-print(devices)
-```
-- Using the RFCOMM-TCP Bridge
-```python
-import signal
-from bluetool import BluetoothServer
-
-
-def handler(signum, frame):
-    server.shutdown()
-
-
-tcp_port = 8100
-server = BluetoothServer(tcp_port)
-
-signal.signal(signal.SIGINT, handler)
-signal.signal(signal.SIGTERM, handler)
-
-server.run()
-```
-- Using the Bluetooth Agent
-```python
-import signal
-from bluetool.agent import Client, AgentSvr
-
-
-class MyClient(Client):
-
-    def request_pin_code(self, dev_info):
-        print(dev_info)
-        return raw_input("Input pin code:")
-
-    def request_passkey(self, dev_info):
-        print(dev_info)
-        return raw_input("Input passkey:")
-
-    def request_confirmation(self, dev_info, *args):
-        print(dev_info, args)
-        return raw_input("Input 'yes' to accept request:") == "yes"
-
-    def request_authorization(self, dev_info):
-        print(dev_info)
-        return raw_input("Input 'yes' to accept request:") == "yes"
-
-
-def handler(signum, frame):
-    svr.shutdown()
-
-
-svr = AgentSvr(client_class=MyClient)
-
-signal.signal(signal.SIGINT, handler)
-signal.signal(signal.SIGTERM, handler)
-
-svr.run()
-```
-
 ### About the project
 
 This package was written by [Aleksandr Aleksandrov](https://github.com/AD-Aleksandrov) working at [Emlid](https://emlid.com/).
 
 The bluetool was originally written for the [Emlid Reach RTK receiver](https://emlid.com/reach/), but we decided to open source it, as there is no easy Python API for BT pairing/connecting. Feel free to add issues and submit pull requests.
+
+### Additional comments
+
+This project was modified by rTomas for RGB-Pi use in Raspberry Pi removing all the unnecessary server and agent parts
