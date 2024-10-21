@@ -1,16 +1,21 @@
 ### Bluetool
-
 A simple Python API for Bluetooth D-Bus calls. Allows easy pairing, connecting and scanning.
+
+#### Why fork
+I want to add error handelling and make this tool better.
 
 #### Dependencies
 
 - `python-dbus`
 
-The package was tested with **Python 3.7**
+The package was tested with **Python 3.12**
 
 #### Installation
 
-`sudo make install`
+```
+git clone https://github.com/newor0599/bluetool
+make install
+```
 
 #### Usage
 
@@ -41,8 +46,7 @@ The package was tested with **Python 3.7**
 
 This package was written by [Aleksandr Aleksandrov](https://github.com/AD-Aleksandrov) working at [Emlid](https://emlid.com/).
 
-The bluetool was originally written for the [Emlid Reach RTK receiver](https://emlid.com/reach/), but we decided to open source it, as there is no easy Python API for BT pairing/connecting. Feel free to add issues and submit pull requests.
+The bluetool was originally written for the [Emlid Reach RTK receiver](https://emlid.com/reach/), but they decided to open source it, as there is no easy Python API for BT pairing/connecting. Feel free to add issues and submit pull requests.
 
 ### Additional comments
-
 This project was modified by rTomas for RGB-Pi use in Raspberry Pi removing all the unnecessary server and agent parts
